@@ -7,5 +7,5 @@ Handler = Proc.new do |req, res|
   # else
   #   res.body = "Hello, stranger!"
   # end
-  res.body = req.query
+  res.body = req.query.to_s
 end
