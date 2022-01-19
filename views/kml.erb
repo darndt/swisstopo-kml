@@ -34,7 +34,7 @@
         <drawOrder><%= z %></drawOrder>
         <name><%= "#{z}/#{x}/#{y}" %></name>
         <Icon>
-          <href><%= tile_url -%></href>
+          <href><%= tile_url %></href>
         </Icon>
         <LatLonBox>
           <north><%= n %></north>
@@ -59,7 +59,7 @@
             </Lod>
           </Region>
           <Link>
-            <href><%= CGI::escape(kml_url) -%></href>
+            <href><%= CGI::escape(kml_url) %></href>
             <viewRefreshMode>onRegion</viewRefreshMode>
           </Link>
         </NetworkLink>
