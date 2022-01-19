@@ -21,7 +21,7 @@ get '/kml' do
     @y_range = @y*2 .. @y*2+1
   else
     @z = 8
-    @x_range = tiles[8][:x_start] .. tiles[8][:x_end]
+    @x_range =  tiles[8][:x_start] .. tiles[8][:x_end]
     @y_range = tiles[8][:y_start] .. tiles[8][:y_end]
   end
 
