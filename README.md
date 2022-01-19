@@ -1,7 +1,7 @@
 # swisstopo-kml
 This provides a network link for Google Earth to display the topographic map for Switzerland by Swisstopo ("ch.swisstopo.pixelkarte-farbe").
 
-![screenshot](screenshot.png)
+![screenshot](/screenshot.png)
 
 ## How to use
 - Open Google Earth
