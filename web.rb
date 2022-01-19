@@ -26,7 +26,7 @@ get '/kml' do
   end
 
   @tile_url = "https://wmts10.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/%{z}/%{x}/%{y}.jpeg"
-  @kml_url = "http#{'s' if request.secure?}://#{request.host_with_port}/api?z=%{z}&amp;x=%{x}&amp;y=%{y}"
+  @kml_url = "http#{'s' if request.secure?}://#{request.host_with_port}/kml?z=%{z}&amp;x=%{x}&amp;y=%{y}"
 
   erb :kml
 
