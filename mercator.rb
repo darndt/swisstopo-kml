@@ -1,4 +1,4 @@
-class MercatorProjection
+class Mercator
   @@MERCATOR_RANGE = 256
   @@pixelOrigin_x = @@MERCATOR_RANGE / 2.0
   @@pixelOrigin_y = @@MERCATOR_RANGE / 2.0
@@ -11,14 +11,14 @@ class MercatorProjection
     # 89.189.  This is about a third of a tile past the edge of the world tile.
     siny = [[Math::sin(lat*Math::PI/180.0), -0.9999].max, 0.9999].min
     y = 128 + 0.5 * Math::log((1 + siny) / (1 - siny)) * (-1.0*@@pixelsPerLonRadian)
-    return [x, y]
+    [x, y]
   end
  
   def self.fromPointToLatLng(x, y)
     lng = (x - 128) / @@pixelsPerLonDegree
     latRadians = (y - 128) / (-1.0 * @@pixelsPerLonRadian)
     lat = (2 * Math.atan(Math::exp(latRadians)) - Math::PI / 2) * 180 / Math::PI
-    return [lat, lng]
+    [lat, lng]
   end
   
   # calculates the coordinate of the upper left corner of the tile

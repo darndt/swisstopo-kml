@@ -1,70 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
-<Document>
-  <name>swisstopo</name> 
-  <Region>
-    <LatLonAltBox>
-      <north>
-        <%= MercatorProjection.fromTileXYZoomToLatLng(x_range.min, y_range.min, z)[0] %>
-      </north>
-      <south>
-        <%= MercatorProjection.fromTileXYZoomToLatLng(x_range.min, y_range.max+1, z)[0] %>
-      </south>
-      <east>
-        <%= MercatorProjection.fromTileXYZoomToLatLng(x_range.max+1, y_range.min, z)[1] %>
-      </east>
-      <west>
-        <%= MercatorProjection.fromTileXYZoomToLatLng(x_range.min, y_range.min, z)[1] %>
-      </west>
-    </LatLonAltBox>
-    <Lod>
-      <minLodPixels><%= z==8 ? -1 : 128 %></minLodPixels>
-      <maxLodPixels><%= z==15 ? -1 : 1024 %></maxLodPixels>
-    </Lod>
-  </Region>
-  <% x_range.each do |x| %>
-    <% y_range.each do |y| %>
-      <% tile_url = "https://wmts10.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/#{z}/#{x}/#{y}.jpeg" %>
-      <% kml_url = "http#{'s' if request.secure?}://#{request.host_with_port}/api?z=#{z}&amp;x=#{x}&amp;y=#{y}" %>
-      <% n = MercatorProjection.fromTileXYZoomToLatLng(x, y, z)[0] %>
-      <% s = MercatorProjection.fromTileXYZoomToLatLng(x, y+1, z)[0] %>
-      <% e = MercatorProjection.fromTileXYZoomToLatLng(x+1, y, z)[1] %>
-      <% w = MercatorProjection.fromTileXYZoomToLatLng(x, y, z)[1] %>
-      <GroundOverlay>
-        <drawOrder><%= z %></drawOrder>
-        <name><%= "#{z}/#{x}/#{y}" %></name>
-        <Icon>
-          <href><%= tile_url %></href>
-        </Icon>
-        <LatLonBox>
-          <north><%= n %></north>
-          <south><%= s %></south>
-          <east><%= e %></east>
-          <west><%= w %></west>
-        </LatLonBox>
-      </GroundOverlay>
-      <% if z < 15 %>
-        <NetworkLink>
-          <name><%= "#{z}-#{x}-#{y}" %></name>
-          <Region>
-            <LatLonAltBox>
-              <north><%= n %></north>
-              <south><%= s %></south>
-              <east><%= e %></east>
-              <west><%= w %></west>
-            </LatLonAltBox>
-            <Lod>
-              <minLodPixels><%= z==8 ? -1 : 128 %></minLodPixels>
-              <maxLodPixels><%= z==15 ? -1 : 1024 %></maxLodPixels>
-            </Lod>
-          </Region>
-          <Link>
-            <href><%= kml_url %></href>
-            <viewRefreshMode>onRegion</viewRefreshMode>
-          </Link>
-        </NetworkLink>
+  <Document>
+    <name>swisstopo</name>
+    <Region>
+      <LatLonAltBox>
+        <north>
+          <%= Mercator.fromTileXYZoomToLatLng(@x_range.min, @y_range.min, @z)[0] %>
+        </north>
+        <south>
+          <%= Mercator.fromTileXYZoomToLatLng(@x_range.min, @y_range.max+1, @z)[0] %>
+        </south>
+        <east>
+          <%= Mercator.fromTileXYZoomToLatLng(@x_range.max+1, @y_range.min, @z)[1] %>
+        </east>
+        <west>
+          <%= Mercator.fromTileXYZoomToLatLng(@x_range.min, @y_range.min, @z)[1] %>
+        </west>
+      </LatLonAltBox>
+      <Lod>
+        <minLodPixels><%= @z==8 ? -1 : 128 %></minLodPixels>
+        <maxLodPixels><%= @z==15 ? -1 : 1024 %></maxLodPixels>
+      </Lod>
+    </Region>
+    <% @x_range.each do |x| %>
+      <% @y_range.each do |y| %>
+        <% n = Mercator.fromTileXYZoomToLatLng(x, y, @z)[0] %>
+        <% s = Mercator.fromTileXYZoomToLatLng(x, y+1, @z)[0] %>
+        <% e = Mercator.fromTileXYZoomToLatLng(x+1, y, @z)[1] %>
+        <% w = Mercator.fromTileXYZoomToLatLng(x, y, @z)[1] %>
+        <GroundOverlay>
+          <drawOrder><%= @z %></drawOrder>
+          <name><%= "#{@z}-#{x}-#{y}" %></name>
+          <Icon>
+            <href><%= @tile_url % {z: @z, x: x, y: y} %></href>
+          </Icon>
+          <LatLonBox>
+            <north><%= n %></north>
+            <south><%= s %></south>
+            <east><%= e %></east>
+            <west><%= w %></west>
+          </LatLonBox>
+        </GroundOverlay>
+        <% if @z <= 14 %>
+          <NetworkLink>
+            <name><%= "#{@z}-#{x}-#{y}" %></name>
+            <Region>
+              <LatLonAltBox>
+                <north><%= n %></north>
+                <south><%= s %></south>
+                <east><%= e %></east>
+                <west><%= w %></west>
+              </LatLonAltBox>
+              <Lod>
+                <minLodPixels><%= @z==8 ? -1 : 128 %></minLodPixels>
+                <maxLodPixels><%= @z==15 ? -1 : 1024 %></maxLodPixels>
+              </Lod>
+            </Region>
+            <Link>
+              <href><%= @kml_url % {z: @z, x: x, y: y} %></href>
+              <viewRefreshMode>onRegion</viewRefreshMode>
+            </Link>
+          </NetworkLink>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</Document>
+  </Document>
 </kml>
