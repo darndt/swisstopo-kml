@@ -25,7 +25,7 @@
   <% x_range.each do |x| %>
     <% y_range.each do |y| %>
       <% tile_url = "https://wmts10.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/#{z}/#{x}/#{y}.jpeg" %>
-      <% kml_url = "http#{'s' if request.secure?}://#{request.host_with_port}/api?z=#{z}&x=#{x}&y=#{y}" %>
+      <% kml_url = "http#{'s' if request.secure?}://#{request.host_with_port}/api?z=#{z}&amp;x=#{x}&amp;y=#{y}" %>
       <% n = MercatorProjection.fromTileXYZoomToLatLng(x, y, z)[0] %>
       <% s = MercatorProjection.fromTileXYZoomToLatLng(x, y+1, z)[0] %>
       <% e = MercatorProjection.fromTileXYZoomToLatLng(x+1, y, z)[1] %>
@@ -59,7 +59,7 @@
             </Lod>
           </Region>
           <Link>
-            <href><%= CGI::escape(kml_url) %></href>
+            <href><%= kml_url %></href>
             <viewRefreshMode>onRegion</viewRefreshMode>
           </Link>
         </NetworkLink>
