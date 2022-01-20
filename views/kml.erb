@@ -19,7 +19,7 @@
       </LatLonAltBox>
       <Lod>
         <minLodPixels><%= @z==8 ? -1 : 128 %></minLodPixels>
-        <maxLodPixels><%= @z==15 ? -1 : 1024 %></maxLodPixels>
+        <maxLodPixels><%= @z==@z_max ? -1 : 1024 %></maxLodPixels>
       </Lod>
     </Region>
     <% @x_range.each do |x| %>
@@ -41,7 +41,7 @@
             <west><%= w %></west>
           </LatLonBox>
         </GroundOverlay>
-        <% if @z <= 14 %>
+        <% if @z < @z_max %>
           <NetworkLink>
             <name><%= "#{@z}-#{x}-#{y}" %></name>
             <Region>
@@ -53,7 +53,7 @@
               </LatLonAltBox>
               <Lod>
                 <minLodPixels><%= @z==8 ? -1 : 128 %></minLodPixels>
-                <maxLodPixels><%= @z==15 ? -1 : 1024 %></maxLodPixels>
+                <maxLodPixels><%= @z==@z_max ? -1 : 1024 %></maxLodPixels>
               </Lod>
             </Region>
             <Link>

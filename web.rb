@@ -10,8 +10,9 @@ end
 
 get '/kml' do
   tiles = {
-    8 => {x_start: 131, x_end: 136, y_start: 88, y_end: 92},
+    8 => {x_start: 132, x_end: 135, y_start: 89, y_end: 91},
   }
+  @z_max = 17
 
   if params[:z]
     @z = params[:z].to_i
