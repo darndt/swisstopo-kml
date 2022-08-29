@@ -13,3 +13,6 @@ The code can be easily adapted for other Swisstopo tile layers:
 - Fork the repo
 - Modify `@tile_url` in `web.rb`
 - Push to Heroku etc
+
+## Run locally
+`rackup config.ru`
