@@ -1,7 +1,11 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "3.0.3"
+# git_source(:github) do |repo_name|
+#   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+#   "https://github.com/#{repo_name}.git"
+# end
 
-gem "puma"
-gem "sinatra"
-gem "rake"
+ruby '2.7.0'
+
+gem 'sinatra', '~> 1.4', '>= 1.4.8'
+gem 'rake', '~> 11.3'
