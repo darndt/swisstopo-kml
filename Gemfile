@@ -8,5 +8,6 @@ end
 ruby '2.7.0'
 
 gem 'sinatra', '~> 1.4', '>= 1.4.8'
-# gem 'rake', '~> 11.3', require: false
+
 gem 'rake', '~> 11.3'
+# this and the empty Rakefile needed somehow for Hatchbox deployment...

@@ -6,7 +6,7 @@ This provides a network link for Google Earth to display the topographic map for
 ## How to use
 - Open Google Earth
 - Go to "Add..." > "Network Link"
-- Paste this URL: `https://swisstopo-kml.herokuapp.com/kml`
+- Paste this URL: `https://yoo9r.hatchboxapp.com/kml`
 
 ## Modifications
 The code can be easily adapted for other Swisstopo tile layers:
