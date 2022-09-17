@@ -7,7 +7,7 @@ end
 
 ruby '2.7.0'
 
-gem 'sinatra', '~> 1.4', '>= 1.4.8'
+gem 'sinatra', '2.2.2'
 
-gem 'rake', '~> 11.3'
+gem 'rake', '13.0.6'
 # this and the empty Rakefile needed somehow for Hatchbox deployment...
