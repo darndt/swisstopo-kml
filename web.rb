@@ -10,6 +10,8 @@ get '/' do
 end
 
 get '/kml' do
+  content_type 'application/vnd.google-earth.kml+xml'
+
   tiles = {
     8 => {x_start: 132, x_end: 135, y_start: 89, y_end: 91},
   }
